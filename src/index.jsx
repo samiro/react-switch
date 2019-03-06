@@ -74,12 +74,12 @@ class ReactSwitch extends Component {
 
   $onDragStop(event) {
     const { $pos, $isDragging, $dragStartingTime } = this.state;
-    const { checked } = this.props;
+    const { checked, onlyDrag } = this.props;
     const halfwayCheckpoint = (this.$checkedPos + this.$uncheckedPos) / 2;
 
     // Simulate clicking the handle
     const timeSinceStart = Date.now() - $dragStartingTime;
-    if (!$isDragging || timeSinceStart < 250) {
+    if ((!$isDragging || timeSinceStart < 250) && !onlyDrag) {
       this.$onChange(event);
 
       // Handle dragging from checked position
@@ -359,6 +359,7 @@ class ReactSwitch extends Component {
 ReactSwitch.propTypes = {
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  onlyDrag: PropTypes.bool,
   disabled: PropTypes.bool,
   offColor: hexColorPropType,
   onColor: hexColorPropType,

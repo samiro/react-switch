@@ -201,11 +201,12 @@ var ReactSwitch = /*@__PURE__*/(function (Component) {
     var $dragStartingTime = ref.$dragStartingTime;
     var ref$1 = this.props;
     var checked = ref$1.checked;
+    var onlyDrag = ref$1.onlyDrag;
     var halfwayCheckpoint = (this.$checkedPos + this.$uncheckedPos) / 2;
 
     // Simulate clicking the handle
     var timeSinceStart = Date.now() - $dragStartingTime;
-    if (!$isDragging || timeSinceStart < 250) {
+    if ((!$isDragging || timeSinceStart < 250) && !onlyDrag) {
       this.$onChange(event);
 
       // Handle dragging from checked position
@@ -465,6 +466,7 @@ var ReactSwitch = /*@__PURE__*/(function (Component) {
 ReactSwitch.propTypes = {
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  onlyDrag: PropTypes.bool,
   disabled: PropTypes.bool,
   offColor: hexColorPropType,
   onColor: hexColorPropType,
