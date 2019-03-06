@@ -181,6 +181,7 @@ class ReactSwitch extends Component {
     const {
       checked,
       disabled,
+      onlyDrag,
       className,
       offColor,
       onColor,
@@ -316,7 +317,7 @@ class ReactSwitch extends Component {
         <div
           className="react-switch-bg"
           style={backgroundStyle}
-          onClick={disabled ? null : this.$onClick}
+          onClick={(disabled || onlyDrag)? null : this.$onClick}
           onMouseDown={e => e.preventDefault()}
         >
           {checkedIcon && <div style={checkedIconStyle}>{checkedIcon}</div>}
